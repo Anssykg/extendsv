@@ -1,0 +1,21 @@
+{
+    "name": "extendsv/extendsv",
+    "description": "common class",
+    "require": {
+        "php": ">=7.0"
+    },
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anssykg",
+            "email": "1099815904@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload-dev": {
+        "psr-4": {
+            "Extendsv\\": "src"
+        }
+    }
+}
