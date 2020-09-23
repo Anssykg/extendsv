@@ -19,7 +19,7 @@ class HttpHandle
      * @param int $https
      * @return bool|mixed [description]
      */
-    function http_send_curl($url, $params = false, $isPost = 0, $https = 0)
+    public static function http_send_curl($url, $params = false, $isPost = 0, $https = 0)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
