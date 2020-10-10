@@ -28,7 +28,7 @@ class WeChatPublicAccount
     public static function get_access_token()
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' . self::$appid . '&secret=' . self::$secret;
-        $tokenData = Method::http_send_curl($url, $params = false, 0, 1);
+        $tokenData = HttpHandle::http_send_curl($url, $params = false, 0, 1);
         if (!empty($tokenData['access_token'])) {
             $access_token = $tokenData['access_token'];
             self::$access_token = $access_token;
