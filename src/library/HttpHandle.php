@@ -61,7 +61,7 @@ class HttpHandle
      * @param $url
      * @return bool|string [description]
      */
-    public function getHttp($url)
+    public static function getHttp($url)
     {
 
         $curl = curl_init();
@@ -79,7 +79,7 @@ class HttpHandle
      * @param $url
      * @return bool|string [description]
      */
-    public function getSSLHttp($url)
+    public static function getSSLHttp($url)
     {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
@@ -103,7 +103,7 @@ class HttpHandle
      * @param $post
      * @return bool|string [description]
      */
-    public function post_curls($url, $post)
+    public static function post_curls($url, $post)
     {
         $curl = curl_init(); // 启动一个CURL会话
         $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'] ?? 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36';
