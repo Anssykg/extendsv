@@ -85,4 +85,30 @@ class Common
         $orderId = $key . $msectime . $uid . mt_rand(10000, 99999);
         return $orderId;
     }
+
+    /**
+     * 数组从新组合排序
+     * @arrayArrange
+     * @param $sortFlag
+     * @param $field
+     * @param $arr
+     * @return mixed [description]
+     */
+    public static function arrayArrange($sortFlag, $field, $arr)
+    {
+        $sort = [
+            'direction' => $sortFlag, //排序顺序标志 SORT_DESC 降序；SORT_ASC 升序
+            'field' => $field,       //排序字段
+        ];
+        $arrSort = [];
+        foreach ($arr as $uniqid => $row) {
+            foreach ($row as $key => $value) {
+                $arrSort[$key][$uniqid] = $value;
+            }
+        }
+        if ($sort['direction']) {
+            array_multisort($arrSort[$sort['field']], constant($sort['direction']), $arr);
+        }
+        return $arr;
+    }
 }
