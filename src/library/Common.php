@@ -87,28 +87,25 @@ class Common
     }
 
     /**
-     * 数组从新组合排序
-     * @arrayArrange
-     * @param $sortFlag
-     * @param $field
-     * @param $arr
-     * @return mixed [description]
-     */
-    public static function arrayArrange($sortFlag, $field, $arr)
+     * 二维数据按照某些字段进行的升序或者降序排列.
+     *
+     * @param array $sortArr 排序字段数组例：[['field'=>'score','sort'=>SORT_DESC],['field'=>'create_time','sort'=>SORT_ASC]]
+     *                       field需要排序的字段，sort排序顺序,SORT_DESC 降序,SORT_ASC 升序
+     * @param array $arrList ,需要排序的二维数组
+     *
+     * @return array 排序后的数组
+     * */
+    public static function arrayArrange($sortArr, $arrList)
     {
-        $sort = [
-            'direction' => $sortFlag, //排序顺序标志 SORT_DESC 降序；SORT_ASC 升序
-            'field' => $field,       //排序字段
-        ];
-        $arrSort = [];
-        foreach ($arr as $uniqid => $row) {
-            foreach ($row as $key => $value) {
-                $arrSort[$key][$uniqid] = $value;
-            }
+        $sortFlog = [];
+        foreach ($sortArr as $k => $v) {
+            $sortFlog[] = array_column($arrList, $v['field']);
+            $sortFlog[] = $v['sort'];
         }
-        if ($sort['direction']) {
-            array_multisort($arrSort[$sort['field']], constant($sort['direction']), $arr);
-        }
-        return $arr;
+        $sortFlog[] = &$arrList;
+        call_user_func_array('array_multisort', $sortFlog);
+
+        return $arrList;
     }
+
 }
