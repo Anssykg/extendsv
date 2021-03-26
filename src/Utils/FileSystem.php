@@ -116,7 +116,7 @@ class FileSystem
     /**
      * 浏览器下载网络文件
      * 支持多种文件格式
-     * @downNetworkImage
+     * @downNetworkFile
      * @param $url  网络文件地址
      */
     public static function downNetworkFile($url)
