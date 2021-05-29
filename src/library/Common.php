@@ -83,8 +83,8 @@ class Common
     /**
      * 获取随机字符串
      * @random
-     * @param int $length   长度
-     * @param string $type  类型
+     * @param int $length 长度
+     * @param string $type 类型
      * @return string [description]
      */
     public static function random($length = 6, $type = 'all')
@@ -106,5 +106,31 @@ class Common
             $code .= $string{mt_rand(0, $strlen)};
         }
         return $code;
+    }
+
+    /**
+     * 正则检测路由是否是网络链接
+     * @is_url
+     * @param $url
+     * @return bool [description]
+     */
+    public static function is_url($url)
+    {
+        $pattern = "#(http|https)://(.*\.)?.*\..*#i";
+        if (preg_match($pattern, $url)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 验证是否为手机号码
+     * @param $string string 手机号码
+     * @return bool
+     */
+    public static function isMobile($string)
+    {
+        return !!preg_match('/^1[3|4|5|7|8]\d{9}$/', $string);
     }
 }

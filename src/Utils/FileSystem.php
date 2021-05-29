@@ -133,4 +133,26 @@ class FileSystem
         }
         fclose($file);
     }
+
+    /**
+     * CURL 检测远程文件是否在
+     * @param $url
+     * @return bool
+     */
+    public static function curlFileExist($url)
+    {
+        $ch = curl_init();
+        try {
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+            $contents = curl_exec($ch);
+            if (preg_match("/404/", $contents)) return false;
+            if (preg_match("/403/", $contents)) return false;
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }
