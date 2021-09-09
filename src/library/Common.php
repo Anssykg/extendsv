@@ -25,7 +25,10 @@ class Common
         return false;
     }
 
-    //TODO 判定是否在cli模式
+    /**
+     * 判定是否在cli模式
+     * @return bool
+     */
     function is_cli()
     {
         return preg_match("/cli/i", php_sapi_name()) ? true : false;
@@ -131,6 +134,6 @@ class Common
      */
     public static function isMobile($string)
     {
-        return !!preg_match('/^1[3|4|5|7|8]\d{9}$/', $string);
+        return !!preg_match('/^1[3|4|5|7|8|9]\d{9}$/', $string);
     }
 }

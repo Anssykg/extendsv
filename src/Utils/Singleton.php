@@ -3,7 +3,10 @@
 
 namespace Extendsv\Utils;
 
-
+/**
+ * Trait Singleton 单例
+ * @package Extendsv\Utils
+ */
 trait Singleton
 {
     private static $instance;

@@ -11,7 +11,7 @@ namespace Extendsv\Utils;
 class FileSystem
 {
     /**
-     * 获取图片信息
+     * 获取图片信息(支持本地和网络图片)
      * @getNetworkImg
      * @param $url
      * @return array [description]
@@ -21,6 +21,7 @@ class FileSystem
         $file_size = 1024 * 20480;//限制文件大小k
         $file_imgs = ['jpg', 'jpeg', 'png', 'bmp'];
         $suffix = pathinfo($url, PATHINFO_EXTENSION);
+        $name = basename($url);
         ob_start();
         readfile($url);
         $content = ob_get_contents(); //获取图片的二进制流
@@ -32,7 +33,7 @@ class FileSystem
         if (!in_array($suffix, $file_imgs)) {
             return false;
         }
-        return compact('size', 'suffix', 'content');//返回文件大小，后缀+文件流
+        return compact('size', 'name', 'suffix', 'content');//返回文件大小，后缀+文件流
     }
 
     /**
