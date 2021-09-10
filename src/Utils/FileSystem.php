@@ -94,22 +94,22 @@ class FileSystem
     }
 
     /**
-     * 网络图片保存到服务器
-     * @downNetworkImageDisk
+     * 网络文件保存到服务器
+     * @downNetworkFileDisk
      * @param $url      网络图片地址
      * @param $target   目标地址
      * @return bool [description]
      */
-    public static function downNetworkImageDisk($url, $target)
+    public static function downNetworkFileDisk($url, $target)
     {
         ob_start();
         readfile($url);
-        $content = ob_get_contents(); //获取图片的二进制流
+        $content = ob_get_contents(); //获取文件的二进制流
         ob_end_clean();
         $targetDir = dirname($target);
         if (!self::createDirectory($targetDir, 777)) return false;
-        $fp2 = @fopen($target, "a");//生成预存图片流文件
-        fwrite($fp2, $content);//向当前目录的流文件写入图片信息
+        $fp2 = @fopen($target, "a");//生成预存流文件
+        fwrite($fp2, $content);//向当前目录的流文件写入指定文件
         fclose($fp2);
         return true;
     }
