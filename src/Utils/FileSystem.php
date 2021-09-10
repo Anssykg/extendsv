@@ -96,7 +96,7 @@ class FileSystem
     /**
      * 网络文件保存到服务器
      * @downNetworkFileDisk
-     * @param $url      网络图片地址
+     * @param $url      网络文件地址
      * @param $target   目标地址
      * @return bool [description]
      */
