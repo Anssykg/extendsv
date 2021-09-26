@@ -10,7 +10,8 @@ namespace Extendsv;
 
 class Test
 {
-    public function index(){
+    public function index()
+    {
         return 12;
     }
 }

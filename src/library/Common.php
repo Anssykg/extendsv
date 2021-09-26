@@ -113,11 +113,11 @@ class Common
 
     /**
      * 正则检测路由是否是网络链接
-     * @is_url
+     * @isUrl
      * @param $url
      * @return bool [description]
      */
-    public static function is_url($url)
+    public static function isUrl($url)
     {
         $pattern = "#(http|https)://(.*\.)?.*\..*#i";
         if (preg_match($pattern, $url)) {
@@ -129,11 +129,51 @@ class Common
 
     /**
      * 验证是否为手机号码
-     * @param $string string 手机号码
+     * @param $string 手机号
+     * @param string $rule 自定义段落
      * @return bool
      */
-    public static function isMobile($string)
+    public static function isMobile($string, $rule = '3|4|5|7|8|9')
     {
-        return !!preg_match('/^1[3|4|5|7|8|9]\d{9}$/', $string);
+        return !!preg_match('/^1[' . $rule . ']\d{9}$/', $string);
+    }
+
+    /**
+     * 获取字符串中图片地址
+     * @param string $string 字符串内容
+     * @param string $order 要获取哪张图片，all，0第一张图片
+     * @return array|mixed|string
+     */
+    public static function getStringImages(string $string = '', $order = 'all')
+    {
+        $images = [];
+        if ($string != '') {
+            $pattern = "/<img .*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/";
+            preg_match_all($pattern, $string, $match);
+            if (isset($match[1]) && !empty($match[1])) {
+                $images = $match[1];
+            }
+        } else {
+            return '';
+        }
+        $match = array_filter($images);
+        if ($order !== 'all') {
+            return $images[intval($order)];
+        } else {
+            return $images;
+        }
+    }
+
+    /**
+     * 删除字符串中html标签
+     * @param $string
+     * @return string
+     */
+    public static function deleteHtml($string)
+    {
+        $string = strip_tags($string);
+        $string = trim($string); //清除字符串两边的空格
+        $string = str_replace('&nbsp;', '', $string);
+        return trim($string); //返回字符串
     }
 }
