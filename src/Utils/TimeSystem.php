@@ -77,9 +77,42 @@ class TimeSystem
             'start' => date('Y-m-d 00:00:00', strtotime('-1 day')),
             'end' => date('Y-m-d 23:59:59', strtotime('-1 day')),
         ];
+        //本周
+        $this_week_arr = [
+            'start' => date('Y-m-d H:i:s', strtotime("-7 day", strtotime("next Monday", time()))),
+            'end' => date('Y-m-d H:i:s'),
+        ];
+        //一周内
+        $within_week_arr = [
+            'start' => date('Y-m-d H:i:s', strtotime("-7 day", time())),
+            'end' => date('Y-m-d H:i:s'),
+        ];
         //当月
-        $cur_month_arr = [
+        $this_month_arr = [
             'start' => date('Y-m-1 00:00:00'),
+            'end' => date('Y-m-d H:i:s'),
+        ];
+        //今天号数
+        $nd = date("d");
+        //本月最后一天号数
+        $nt = date("t");
+        //上个月最后一天号数
+        $lt = date("t", strtotime("-1 month"));
+        $yst_month_time_str = date('Y-m-d H:i:s', strtotime("-1 month"));
+        if ($nt > $lt) {
+            if ($nd > $lt) {
+                $yst_month_time_str = date('Y-m-1 00:00:00');
+            }
+        }
+        if ($nt < $lt) {
+            if ($nt == $nd) {
+                $yst_month_time_str = date('Y-m-d H:i:s', strtotime("-1 day", (int)date('Y-m-1 H:i:s')));
+            }
+        }
+        //上个月的现在
+        //一月内
+        $within_month_arr = [
+            'start' => $yst_month_time_str,
             'end' => date('Y-m-d H:i:s'),
         ];
         //上个月
@@ -92,8 +125,6 @@ class TimeSystem
             'start' => date('Y-1-1 00:00:00'),
             'end' => date('Y-m-d H:i:s'),
         ];
-        //上个月的现在
-        $yst_month_time_str = date("Y-m-d H:i:s", strtotime("-1 month"));
-        return compact('now_day_arr', 'yst_day_arr', 'cur_month_arr', 'yst_month_arr', 'tis_year_arr', 'yst_month_time_str');
+        return compact('now_day_arr', 'yst_day_arr', 'this_week_arr', 'within_week_arr', 'this_month_arr', 'within_month_arr', 'yst_month_arr', 'tis_year_arr', 'yst_month_time_str');
     }
 }
