@@ -106,7 +106,7 @@ class TimeSystem
         }
         if ($nt < $lt) {
             if ($nt == $nd) {
-                $yst_month_time_str = date('Y-m-d H:i:s', strtotime("-1 day", (int)date('Y-m-1 H:i:s')));
+                $yst_month_time_str = date('Y-m-d H:i:s', strtotime("-1 day", strtotime("-1 month")));
             }
         }
         //上个月的现在
