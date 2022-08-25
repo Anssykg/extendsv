@@ -148,7 +148,7 @@ class Common
     {
         $images = [];
         if ($string != '') {
-            $pattern = "/<img .*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/";
+            $pattern = "/<img .*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/";
             preg_match_all($pattern, $string, $match);
             if (isset($match[1]) && !empty($match[1])) {
                 $images = $match[1];
