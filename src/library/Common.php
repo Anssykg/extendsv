@@ -172,8 +172,7 @@ class Common
     public static function deleteHtml($string)
     {
         $string = strip_tags($string);
-        $string = trim($string); //清除字符串两边的空格
-        $string = str_replace('&nbsp;', '', $string);
-        return trim($string); //返回字符串
+        $rule = "[&nbsp;|&ldquo;|&rdquo;| ]"; // 注意这里最后是个空格
+        return preg_replace($rule, "", $string);
     }
 }
